@@ -8,6 +8,7 @@
   --accent: #e7e9fc;
   --light: #f4f4fd;
   --white: #fff;
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 h1,
@@ -51,6 +52,22 @@ body {
 
 .menu .menu-item .link-current {
   color: var(--pressed-state);
+  position: relative;
+}
+
+.menu .menu-item .link-current::after {
+  content: '';
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  margin-bottom: -28px;
+  background-color: var(--pressed-state);
 }
 
 .visually-hidden {
@@ -152,6 +169,8 @@ body {
   letter-spacing: 0.02em;
   color: var(--dark);
   text-decoration: none;
+
+  transition: color var(--transition);
 }
 
 .menu {
@@ -160,14 +179,16 @@ body {
   gap: 40px;
 }
 
-.menu:hover,
-.menu:focus {
+.navigation .link:hover,
+.navigation .link:focus {
   color: var(--pressed-state);
 }
 
 .link-address {
   color: var(--text);
   text-decoration: none;
+
+  transition: color var(--transition);
 }
 
 .address {
@@ -182,8 +203,8 @@ body {
   margin-right: 40px;
 }
 
-.address:hover,
-.address:focus {
+.link-address:hover,
+.link-address:focus {
   color: var(--pressed-state);
 }
 /*-------------- Hero----------------- */
@@ -240,6 +261,71 @@ body {
   background-color: var(--pressed-state);
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+/* -----------Modal---------------------- */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  z-index: 100;
+
+  opacity: 1;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 408px;
+  height: 576px;
+
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.btn-modal {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+
+  width: 24px;
+  height: 24px;
+
+  padding: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
+  transition: background-color var(--transition), fill var(--transition);
+}
+
+.btn-modal:hover,
+.btn-modal:focus {
+  background-color: var(--pressed-state);
+  fill: var(--white);
+}
+
+.icon-close {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* --------Adventages----------------- */
@@ -321,6 +407,8 @@ body {
   height: 40px;
   border-radius: 50%;
   background-color: var(--primary-brand);
+
+  transition: background-color var(--transition);
 }
 
 .social-icon {
@@ -356,6 +444,8 @@ body {
   border: 1px solid #8e8f99;
   border-radius: 4px;
   fill: #8e8f99;
+
+  transition: border-color var(--transition), fill var(--transition);
 }
 
 .customers-link:hover,
@@ -419,6 +509,8 @@ body {
   height: 40px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
+
+  transition: background-color var(--transition);
 }
 
 .footer-social-icon {
@@ -444,6 +536,9 @@ body {
 }
 
 .filter-btn {
+  transition: color var(--transition), background-color var(--transition),
+    box-shadow var(--transition);
+
   font-family: inherit;
   font-weight: 600;
   font-size: 16px;
@@ -493,4 +588,31 @@ body {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
   cursor: pointer;
+}
+
+.overlay-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(0, 100%);
+  transition: transform var(--transition);
+
+  padding-top: 40px;
+  padding-right: 32px;
+  padding-left: 32px;
+  width: 100%;
+  height: 100%;
+
+  overflow: auto;
+  background-color: var(--primary-brand);
+  color: var(--light);
+}
+
+.examples-item:hover .overlay {
+  transform: translate(0, 0);
 }

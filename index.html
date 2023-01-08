@@ -52,7 +52,18 @@
       <section class="hero-bgc">
         <div class="container">
           <h1 class="hero">Effective Solutions for Your Business</h1>
-          <button class="hero-btn" type="button">Order Service</button>
+          <button class="hero-btn" type="button" data-modal-open>
+            Order Service
+          </button>
+        </div>
+        <div class="backdrop is-hidden" data-modal>
+          <div class="modal">
+            <button class="btn-modal" type="button" data-modal-close>
+              <svg class="icon-close" width="8" height="8">
+                <use href="./images/icons.svg#icon-close"></use>
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
       <!--------------- Adventages---------- -->
@@ -429,4 +440,5 @@
       </div>
     </footer>
   </body>
+  <script src="./js/modal.js"></script>
 </html>
